@@ -12,19 +12,99 @@ let player2NameEl = document.querySelector('#player2 .name');
 let player2ScoreEl = document.querySelector('#player2 .score');
 
 let listColEl = document.querySelectorAll('.col');
+let cola1El = document.querySelector('.a1');
+let colb1El = document.querySelector('.b1');
+let colc1El = document.querySelector('.c1');
+let cola2El = document.querySelector('.a2');
+let colb2El = document.querySelector('.b2');
+let colc2El = document.querySelector('.c2');
+let cola3El = document.querySelector('.a3');
+let colb3El = document.querySelector('.b3');
+let colc3El = document.querySelector('.c3');
 
 let msgEl = document.querySelector('#msg');
 let gridEl = document.querySelector('.grid');
 
-let currentPlayer = 1;
+let currentPlayer = 0;
+let PlayersItems = ['X', 'O'];
+let PlayersScores = [0, 0]
+let win = false;
 
-player1ItemEl.innerHTML = 'X';
-player1ScoreEl.innerHTML = '0';
+player1ItemEl.innerHTML = PlayersItems[0];
+player1ScoreEl.innerHTML = PlayersScores[0];
 player1NameEl.innerHTML = 'Player1';
 
-player2ItemEl.innerHTML = 'O';
-player2ScoreEl.innerHTML = '0';
+player2ItemEl.innerHTML = PlayersItems[1];
+player2ScoreEl.innerHTML = PlayersScores[1];
 player2NameEl.innerHTML = 'Player2';
+
+const verif = () => {
+    if (
+        cola1El.innerHTML == PlayersItems[currentPlayer] &&
+        colb1El.innerHTML == PlayersItems[currentPlayer] &&
+        colc1El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        cola2El.innerHTML == PlayersItems[currentPlayer] &&
+        colb2El.innerHTML == PlayersItems[currentPlayer] &&
+        colc2El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        cola3El.innerHTML == PlayersItems[currentPlayer] &&
+        colb3El.innerHTML == PlayersItems[currentPlayer] &&
+        colc3El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        cola1El.innerHTML == PlayersItems[currentPlayer] &&
+        cola2El.innerHTML == PlayersItems[currentPlayer] &&
+        cola3El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        colb1El.innerHTML == PlayersItems[currentPlayer] &&
+        colb2El.innerHTML == PlayersItems[currentPlayer] &&
+        colb3El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        colc1El.innerHTML == PlayersItems[currentPlayer] &&
+        colc2El.innerHTML == PlayersItems[currentPlayer] &&
+        colc3El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        cola1El.innerHTML == PlayersItems[currentPlayer] &&
+        colb2El.innerHTML == PlayersItems[currentPlayer] &&
+        colc3El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    if (
+        colc1El.innerHTML == PlayersItems[currentPlayer] &&
+        colb2El.innerHTML == PlayersItems[currentPlayer] &&
+        cola3El.innerHTML == PlayersItems[currentPlayer]
+    ) {
+        return true;
+    }
+
+    return false;
+};
 
 listColEl.forEach(colEl => {
     colEl.addEventListener('click', (event) => {
@@ -33,16 +113,36 @@ listColEl.forEach(colEl => {
         msgEl.classList.remove('danger');
         msgEl.classList.remove('success');
 
-        if (event.target.innerHTML == "") {
-            if (currentPlayer == 1) {
-                event.target.innerHTML = player1ItemEl.innerHTML;
-                currentPlayer = 2;
+        if (!win) {
+            if (event.target.innerHTML == "") {
+                if (currentPlayer == 0) {
+                    event.target.innerHTML = player1ItemEl.innerHTML;
+                } else {
+                    event.target.innerHTML = player2ItemEl.innerHTML;
+                }
+                
+                win = verif();
+                
+                if (win) {
+                    msgEl.innerHTML = "Player" + (currentPlayer+1) + " gagne !";
+                    msgEl.classList.add('success');
+
+                    PlayersScores[currentPlayer] ++;
+                    player1ScoreEl.innerHTML = PlayersScores[0];
+                    player2ScoreEl.innerHTML = PlayersScores[1];
+                } else {
+                    if (currentPlayer == 0) {
+                        currentPlayer = 1;
+                    } else {
+                        currentPlayer = 0;
+                    }
+                }
             } else {
-                event.target.innerHTML = player2ItemEl.innerHTML;
-                currentPlayer = 1;
+                msgEl.innerHTML = "Vous ne pouvez pas jouer ici !";
+                msgEl.classList.add('danger');
             }
         } else {
-            msgEl.innerHTML = "Vous ne pouvez pas jouer ici !";
+            msgEl.innerHTML = "Partie terminer !";
             msgEl.classList.add('danger');
         }
     })
