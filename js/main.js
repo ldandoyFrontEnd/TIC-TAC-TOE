@@ -27,8 +27,13 @@ let gridEl = document.querySelector('.grid');
 
 let currentPlayer = 0;
 let PlayersItems = ['X', 'O'];
-let PlayersScores = [0, 0]
+let PlayersScores = [
+    isNaN(parseInt(localStorage.getItem('player1Score'))) ? 0 : parseInt(localStorage.getItem('player1Score')), 
+    isNaN(parseInt(localStorage.getItem('player2Score'))) ? 0 : parseInt(localStorage.getItem('player2Score'))
+];
 let win = false;
+
+console.log(PlayersScores);
 
 player1ItemEl.innerHTML = PlayersItems[0];
 player1ScoreEl.innerHTML = PlayersScores[0];
@@ -130,6 +135,9 @@ listColEl.forEach(colEl => {
                     PlayersScores[currentPlayer] ++;
                     player1ScoreEl.innerHTML = PlayersScores[0];
                     player2ScoreEl.innerHTML = PlayersScores[1];
+
+                    localStorage.setItem('player1Score', PlayersScores[0]);
+                    localStorage.setItem('player2Score', PlayersScores[1]);
                 } else {
                     if (currentPlayer == 0) {
                         currentPlayer = 1;
