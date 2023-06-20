@@ -28,13 +28,22 @@ player2NameEl.innerHTML = 'Player2';
 
 listColEl.forEach(colEl => {
     colEl.addEventListener('click', (event) => {
-        console.log("click !", event.target);
-        if (currentPlayer == 1) {
-            event.target.innerHTML = player1ItemEl.innerHTML;
-            currentPlayer = 2;
+        console.log("click !", event.target.innerHTML);
+        msgEl.innerHTML = "";
+        msgEl.classList.remove('danger');
+        msgEl.classList.remove('success');
+
+        if (event.target.innerHTML == "") {
+            if (currentPlayer == 1) {
+                event.target.innerHTML = player1ItemEl.innerHTML;
+                currentPlayer = 2;
+            } else {
+                event.target.innerHTML = player2ItemEl.innerHTML;
+                currentPlayer = 1;
+            }
         } else {
-            event.target.innerHTML = player2ItemEl.innerHTML;
-            currentPlayer = 1;
+            msgEl.innerHTML = "Vous ne pouvez pas jouer ici !";
+            msgEl.classList.add('danger');
         }
     })
 });
