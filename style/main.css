@@ -1,3 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
+    font-family: Arial, Helvetica, sans-serif;
     background: lightcyan;
+    color: #444;
+}
+
+.players {
+    width: 60%;
+    margin: 30px auto;
+    display: flex;
+}
+
+.players .player {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.players .player .info {
+    text-align: center;
+}
+
+.players .player .info .name {
+    font-weight: 300;
+}
+
+.players .player .info .item {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+#msg {
+    width: 60%;
+    margin: 30px auto;
+    padding: 20px;
+    font-weight: 700;
+    text-align: center;
+    display: none;
+}
+
+#msg.success {
+    border: 1px solid lightgreen;
+    background-color: lightseagreen;
+    color: lightgreen;
+    display: block;
+}
+
+#msg.danger {
+    border: 1px solid lightcoral;
+    background-color: lightpink;
+    color: lightcoral;
+    display: block;
+}
+
+.grid {
+    width: 50%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    gap: 10px;
+}
+
+.grid .col {
+    width: 200px;
+    height: 200px;
+    border: 1px solid silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.grid .col:hover {
+    background-color: brown;
+}
+
+.reset {
+    display: block;
+    width: 10%;
+    border: 1px solid silver;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    margin: 20px auto;
+    color: silver;
+}
+
+.reset:hover {
+    background-color: brown;
 }
